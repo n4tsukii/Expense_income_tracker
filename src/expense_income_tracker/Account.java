@@ -2,16 +2,13 @@ package expense_income_tracker;
 
 public class Account {
     private double balance;
-//    private List<Entry> entry_table;
 
     public Account(double balance) {
         this.balance = balance;
-//        entry_table= new ArrayList<>();
         
     }
     public Account() {
         this.balance = 0;
-//        entry_table= new ArrayList<>();
     }
     
     private void setBalance(double amount) {
@@ -29,7 +26,4 @@ public class Account {
     void addBalance(Entry ee) {
         this.addAmount(ee.getAmount());
     }
-//    public void addEntry_toList(Entry ee) {
-//        entry_table.add(ee);
-//    }
 }

@@ -1,11 +1,7 @@
-
 package expense_income_tracker;
-
-import expense_income_tracker.Entry;
 
 import java.util.*;
 import javax.swing.table.AbstractTableModel;
-
 
  public class Entry_Table extends AbstractTableModel  {
     
@@ -19,7 +15,6 @@ import javax.swing.table.AbstractTableModel;
     
     public void addEntry(Entry ee) {
         entries.add(ee);
-        
         fireTableRowsInserted(entries.size()-1,entries.size()-1);
     }
 
