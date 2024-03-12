@@ -6,10 +6,7 @@ import expense_income_tracker.Entry;
 import java.util.*;
 import javax.swing.table.AbstractTableModel;
 
-/**
- *
- * @author japan
- */
+
  public class Entry_Table extends AbstractTableModel  {
     
     private final List<Entry> entries;
