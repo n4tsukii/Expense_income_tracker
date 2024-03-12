@@ -2,8 +2,6 @@ package expense_income_tracker;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.text.*;
 import java.util.Date;
 import javax.swing.*;
