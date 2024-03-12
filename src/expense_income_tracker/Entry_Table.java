@@ -10,7 +10,6 @@ import javax.swing.table.AbstractTableModel;
     
     public Entry_Table() {
         entries = new ArrayList<>();
-        
     }
     
     public void addEntry(Entry ee) {
@@ -18,18 +17,23 @@ import javax.swing.table.AbstractTableModel;
         fireTableRowsInserted(entries.size()-1,entries.size()-1);
     }
 
-    @Override
-    public int getRowCount() { return entries.size(); }
-
-    @Override
-    public int getColumnCount() { return columnNames.length; }
-    
      @Override
-    public String getColumnName(int column){ return columnNames[column]; }
+     public int getRowCount() {
+         return entries.size();
+     }
+
+     @Override
+     public int getColumnCount() {
+         return columnNames.length;
+     }
+
+     @Override
+     public String getColumnName(int column) {
+         return columnNames[column];
+     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        
         Entry ee = entries.get(rowIndex);
         
         return switch (columnIndex) {

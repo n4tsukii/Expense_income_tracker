@@ -6,10 +6,6 @@ import java.text.*;
 import java.util.Date;
 import javax.swing.*;
 
-/**
- *
- * @author japan
- */
 public class Screen extends JFrame {
     private static String formatDouble(double value) {
         DecimalFormat decimalFormat = new DecimalFormat("#,##0");

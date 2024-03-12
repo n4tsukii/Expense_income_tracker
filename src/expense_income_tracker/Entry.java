@@ -7,12 +7,10 @@ public class Entry {
     public String description;
     
     public Entry( double amount, String date, String type, String description) {
-        
         this.amount = amount;
         this.date = date;
         this.type = type;
         this.description = description;
-        
     }
     public Entry() {}
 
