@@ -39,10 +39,7 @@ public class Screen extends JFrame {
     private final String dateFormat = "30/12/1991";
     private final String amountFormat = "29.69";
     
-    
     private double balance;
-    
-    
      public Screen(){
      
         try{
@@ -63,8 +60,7 @@ public class Screen extends JFrame {
         UIManager.put("Button.foreground", Color.WHITE);
         UIManager.put("Button.background", Color.ORANGE);
         UIManager.put("Label.foreground", Color.WHITE);
-    
-        
+
         balance = 0.0;
         
         Model = new Entry_Table();
@@ -79,7 +75,7 @@ public class Screen extends JFrame {
         typeCombobox = new JComboBox<>(new String[] {"Expense","Income"});
         
         addButton = new JButton("Add");
-        balanceLabel = new JLabel("Balance: "+ balance +" VND");
+        balanceLabel = new JLabel("Balance: "+ formatDouble(balance) +" VND");
         
         addButton.addActionListener(e -> addEntry());
         

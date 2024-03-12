@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe14be07-b2ae-46a3-80f9-8a9353a0f7c5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Expense_income_tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Expense_income_tracker.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entry.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExpenseTracker/Account.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExpenseTracker/Entry_Table.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExpenseTracker/ExpenseIncomeTracker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExpenseTracker/Screen.java" beforeDir="false" />
-    </list>
+    <list default="true" id="fe14be07-b2ae-46a3-80f9-8a9353a0f7c5" name="Changes" comment="first commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,11 +73,24 @@
       <workItem from="1710224022515" duration="142000" />
       <workItem from="1710224272520" duration="747000" />
       <workItem from="1710233373476" duration="1015000" />
-      <workItem from="1710238780732" duration="8422000" />
+      <workItem from="1710238780732" duration="8772000" />
     </task>
+    <task id="LOCAL-00001" summary="first commit">
+      <option name="closed" value="true" />
+      <created>1710249624690</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1710249624690</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
   </component>
 </project>
