@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="flatlaf-3.4" level="project" />
+    <orderEntry type="library" exported="" name="mysql-connector-j-8.3.0" level="project" />
   </component>
 </module>

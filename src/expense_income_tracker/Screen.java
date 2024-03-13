@@ -128,8 +128,8 @@ public class Screen extends JFrame {
                 return ;
         }
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        date = dateFormat.format(date);
+        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        //date = dateFormat.format(date);
         Entry entry = new Entry(amount, date, type, description);
 
         //insert entry to database
@@ -150,6 +150,12 @@ public class Screen extends JFrame {
         descriptionField.setText("");
         amountField.setText("");
         typeCombobox.setSelectedIndex(0);
+    }
+
+    public void displaceThis(Entry_Table new_table) {
+        Model.updateEntryTable(new_table.returnAllEntries());
+        Model.fireTableDataChanged();
+        System.out.println("WELLCOME !!");
     }
     
 }

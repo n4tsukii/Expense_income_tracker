@@ -6,6 +6,15 @@ public class ExpenseIncomeTracker {
     }
 
     public static void main(String[] args) {
-         new Screen().setLocationRelativeTo(null);
+        Screen screen = new Screen();
+
+        screen.setLocationRelativeTo(null);
+
+        database db = new database();
+        Entry_Table SQLdata = db.returnAll();
+
+        screen.displaceThis(SQLdata);
+
+
     }
 }

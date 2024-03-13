@@ -5,7 +5,7 @@ import javax.swing.table.AbstractTableModel;
 
  public class Entry_Table extends AbstractTableModel  {
     
-    private final List<Entry> entries;
+    private  List<Entry> entries;
     private final String[] columnNames = {"Date","Type", "Amount","Description"};
     
     public Entry_Table() {
@@ -15,6 +15,21 @@ import javax.swing.table.AbstractTableModel;
     public void addEntry(Entry ee) {
         entries.add(ee);
         fireTableRowsInserted(entries.size()-1,entries.size()-1);
+    }
+
+    public void adden(Entry ee) {
+        entries.add(ee);
+    }
+
+
+
+    public void updateEntryTable(List<Entry> newList) {
+        this.entries = newList;
+        //fireTableDataChanged();
+    }
+
+    public List<Entry> returnAllEntries() {
+        return entries;
     }
 
      @Override

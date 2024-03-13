@@ -1,6 +1,9 @@
 package expense_income_tracker;
 
+import javax.swing.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class database {
     String url = "jdbc:mysql://localhost:3306/personal_finance_tracker_database";
@@ -22,7 +25,11 @@ public class database {
     String user = "root";
     String password = "123456";
 
+
+
+
         public void insertToDatabase (Entry e){
+
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -36,8 +43,11 @@ public class database {
                 Double amount = e.getAmount();
                 String description = e.getDescription();
 
-                System.out.println("den day thi dam dc");
+
                 statement.executeUpdate("insert into entry_table values('" + date + "','" + type + "','" + amount + "','" + description + "')");
+
+                connection.close();
+                statement.close();
 
             } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
@@ -46,12 +56,37 @@ public class database {
                 ex.printStackTrace();
             }
 
+
+
+        }
+
+        // chuyển dữ liệu trả về từ database về dạng ArrayList
+        public Entry_Table databaseToEntryTable(ResultSet result) {
+            Entry_Table entry_table = new Entry_Table();
+            Entry entry;
+
+            try {
+            while(result.next()) {
+                String date = result.getString("date_");
+                String type = result.getString("type_");
+                Double amount = result.getDouble("amount");
+                String description = result.getString("description");
+
+                entry = new Entry(amount,date,type,description);
+                entry_table.adden(entry);
+            }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null ,"retrieved data not found", "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+            return entry_table;
         }
 
 
 
 
-        public void Display_all (){
+        public Entry_Table returnAll(){
+            Entry_Table entry_table = null;
             try {
 
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -63,26 +98,27 @@ public class database {
                 String cmd = "select * from entry_table";
                 ResultSet result = statement.executeQuery(cmd);
 
-                while (result.next()) {
-                    String cal = result.getString("date_");
-                    String tp = result.getString("type_");
-                    String amount = result.getString("amount");
-                    String desciption = result.getString("description");
-                    System.out.println(cal + " " + tp + " " + amount + " " + desciption);
-                }
+                entry_table = this.databaseToEntryTable(result);
 
 
-                //JOptionPane.showMessageDialog(this,"Success");
+                JOptionPane.showMessageDialog(null,"Success");
                 System.out.print("Success");
-
+                
+                
             } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            
+            return entry_table;
 
 
         }
+
+
+
+
     }
 
