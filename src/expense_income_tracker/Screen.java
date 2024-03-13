@@ -17,6 +17,11 @@ public class Screen extends JFrame {
         String formattedDate = dateFormat.format(currentDate);
         dateField.setText(formattedDate);
     }
+    private static String reformatDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(date);
+    }
+
     private final Entry_Table Model;
     private final JTable table;
     private final JTextField dateField;
