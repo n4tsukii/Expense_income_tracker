@@ -13,15 +13,11 @@ public class Screen extends JFrame {
     }
     private static void updateDateField(JTextField dateField) {
         Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         String formattedDate = dateFormat.format(currentDate);
         dateField.setText(formattedDate);
     }
 
-    private static String reformatDate(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return dateFormat.format(date);
-    }
     private final Entry_Table Model;
     private final JTable table;
     private final JTextField dateField;
@@ -132,7 +128,8 @@ public class Screen extends JFrame {
                 return ;
         }
 
-        date = reformatDate(date);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        date = dateFormat.format(date);
         Entry entry = new Entry(amount, date, type, description);
 
         //insert entry to database
