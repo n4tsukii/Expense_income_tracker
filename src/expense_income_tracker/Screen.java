@@ -108,7 +108,6 @@ public class Screen extends JFrame {
             JOptionPane.showMessageDialog(this, "Enter the Amount", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
         try {
             amount = Double.parseDouble(amountStr);
         }
@@ -122,17 +121,22 @@ public class Screen extends JFrame {
             amount *= -1;
         }
 
+        if (balance <= 0 && amount < 0) {
+            int answer = JOptionPane.showConfirmDialog(null, "Are you sure your want to expense more !?", "Warning, Balance is low!!", JOptionPane.OK_CANCEL_OPTION);
+            if (answer == JOptionPane.CANCEL_OPTION)
+                return ;
+        }
         Entry entry = new Entry(amount, date, type, description);
         Model.addEntry(entry);
-
         balance += amount;
+
         balanceLabel.setText("Balance: "+ formatDouble(balance) +" VND");
 
         clearInputFields();
     }
 
     private void clearInputFields() {
-        dateField.setText("");
+        updateDateField(dateField);
         descriptionField.setText("");
         amountField.setText("");
         typeCombobox.setSelectedIndex(0);
