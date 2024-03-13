@@ -26,11 +26,12 @@ public class Screen extends JFrame {
     private final JComboBox<String> typeCombobox;
     private final JButton addButton;
     private final JLabel balanceLabel;
+    private final JButton staticButton;
+    private final JComboBox<String> statictype;
     
     private double balance;
      public Screen(){
         try{
-           
             UIManager.setLookAndFeel(new FlatDarkLaf());
         }
         catch(Exception ex){
@@ -60,11 +61,14 @@ public class Screen extends JFrame {
         descriptionField = new JTextField(10);
         amountField = new JTextField(10);
         typeCombobox = new JComboBox<>(new String[] {"Expense","Income"});
-        
+        statictype = new JComboBox<>(new String[] {"Month", "Week", "Day"});
+
+        staticButton = new JButton("Thong Ke");
         addButton = new JButton("Add");
         balanceLabel = new JLabel("Balance: "+ formatDouble(balance) +" VND");
         
         addButton.addActionListener(e -> addEntry());
+        staticButton.addActionListener(e -> staticpopup());
         
         
         JPanel inputPanel = new JPanel();
@@ -82,9 +86,11 @@ public class Screen extends JFrame {
         inputPanel.add(descriptionField);
 
         inputPanel.add(addButton);
-        
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        bottomPanel.add(balanceLabel);
+
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        bottomPanel.add(staticButton);
+        bottomPanel.add(statictype);
+        bottomPanel.add(balanceLabel, BorderLayout.EAST);
         
         add(inputPanel, BorderLayout.NORTH);
         add(bottomPanel, BorderLayout.SOUTH);
@@ -96,6 +102,10 @@ public class Screen extends JFrame {
         pack();
         setVisible(true);
      }
+
+    private void staticpopup() {
+        JOptionPane.showMessageDialog(null, "Balance " + formatDouble(balance) + " VND", "Thong Ke", JOptionPane.INFORMATION_MESSAGE);
+    }
        
     private void addEntry()
     {
