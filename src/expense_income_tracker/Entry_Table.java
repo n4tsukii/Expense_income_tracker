@@ -1,10 +1,10 @@
 package expense_income_tracker;
 
-import java.util.*;
 import javax.swing.table.AbstractTableModel;
+import java.util.*;
 import java.awt.event.MouseAdapter;
 
- public class Entry_Table extends AbstractTableModel{
+public class Entry_Table  extends AbstractTableModel {
     
     private  List<Entry> entries;
     private final String[] columnNames = {"Date","Type", "Amount","Description"};
@@ -12,28 +12,28 @@ import java.awt.event.MouseAdapter;
     public Entry_Table() {
         entries = new ArrayList<>();
     }
-    
+    //@Override
     public void addEntry(Entry ee) {
         entries.add(ee);
         fireTableRowsInserted(entries.size()-1,entries.size()-1);
     }
-
+    //@Override
     public void adden(Entry ee) {
         entries.add(ee);
     }
 
 
-
+    //@Override
     public void updateEntryTable(List<Entry> newList) {
         this.entries = newList;
         //fireTableDataChanged();
     }
-
+    //@Override
     public List<Entry> returnAllEntries() {
         return entries;
     }
 
-     @Override
+     //@Override
      public int getRowCount() {
          return entries.size();
      }

@@ -2,7 +2,9 @@ package expense_income_tracker;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLOutput;
 import java.text.*;
 import java.util.Date;
 import javax.swing.*;
@@ -10,10 +12,13 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
+
 
 public class Screen extends JFrame {
     private final Entry_Table Model;
     private final JTable table;
+
     private final JTextField dateField;
     private final JTextField descriptionField;
     private final JTextField amountField;
@@ -64,11 +69,20 @@ public class Screen extends JFrame {
         balanceLabel = new JLabel("Balance: "+ formatDouble(balance) +" VND");
         popupMenu.add(menuItemEdit);
         popupMenu.add(menuItemDel);
-//        menuItemEdit.addActionListener(e -> EditOption());
+        menuItemEdit.addActionListener(e -> EditOption());
+
+//        menuItemEdit.addMouseListener(new MouseAdapter() {
+//            public void mouseReleased(MouseEvent e) {
+//                //int i = table.rowAtPoint(e.getPoint());
+//                EditOption(e);
+//
+//            }
+//        });
         menuItemDel.addActionListener(e -> DelOption());
         table.setComponentPopupMenu(popupMenu);
         addButton.addActionListener(e -> addEntry());
         staticButton.addActionListener(e -> staticpopup());
+
 
         table.setComponentPopupMenu(popupMenu);
         table.setFillsViewportHeight(true);
@@ -183,15 +197,20 @@ public class Screen extends JFrame {
     }
 
 
-    private void EditOption(MouseEvent event) {
-        Point point = event.getPoint();
-        JTable model = (JTable)table.getModel();
-        int index = table.rowAtPoint(point);
+    private void EditOption() {
+
+        TableModel model = table.getModel();
+        //int i = table.rowAtPoint(e.getPoint());
+        int index = table.getSelectedRow();
+
+        System.out.println(model.getValueAt(index, 2));
         dateField.setText(model.getValueAt(index,0).toString());
         descriptionField.setText(model.getValueAt(index,1).toString());
         amountField.setText(model.getValueAt(index, 2).toString());
         typeCombobox.setSelectedItem(model.getValueAt(index, 3).toString());
+
     }
+
 
     private void DelOption() {
 

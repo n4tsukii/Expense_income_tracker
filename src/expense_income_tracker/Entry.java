@@ -1,6 +1,8 @@
 package expense_income_tracker;
 
 public class Entry {
+
+    //public int id;
     public double amount;
     public String date;
     public String type;
