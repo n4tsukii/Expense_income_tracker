@@ -7,9 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe14be07-b2ae-46a3-80f9-8a9353a0f7c5" name="Changes" comment="small reconfig">
+    <list default="true" id="fe14be07-b2ae-46a3-80f9-8a9353a0f7c5" name="Changes" comment="daksdasd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExpenseIncomeTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExpenseIncomeTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/expense_income_tracker/Entry_Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/expense_income_tracker/Entry_Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/expense_income_tracker/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/expense_income_tracker/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/expense_income_tracker/database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/expense_income_tracker/database.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +110,9 @@
       <workItem from="1710316053862" duration="149000" />
       <workItem from="1710317100885" duration="301000" />
       <workItem from="1710338743882" duration="1189000" />
+      <workItem from="1710340094353" duration="194000" />
+      <workItem from="1710340645994" duration="1047000" />
+      <workItem from="1710350648525" duration="4890000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -188,7 +194,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710318346368</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="daksdasd">
+      <option name="closed" value="true" />
+      <created>1710340176405</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1710340176405</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,6 +229,7 @@
     <MESSAGE value="update function formatdate for SQL" />
     <MESSAGE value="..." />
     <MESSAGE value="small reconfig" />
-    <option name="LAST_COMMIT_MESSAGE" value="small reconfig" />
+    <MESSAGE value="daksdasd" />
+    <option name="LAST_COMMIT_MESSAGE" value="daksdasd" />
   </component>
 </project>

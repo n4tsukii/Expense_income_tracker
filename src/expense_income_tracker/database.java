@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class database {
-    String url = "jdbc:mysql://localhost:3306/personal_finance_tracker_database";
-    /*  viết cái này vào mySQL rồi chạy
-
+    String url = "jdbc:mysql://localhost:3306/n4tsuki";
+    /*viết cái này vào mySQL rồi chạy
         create database personal_finance_tracker_database;
         use personal_finance_tracker_database;
         create table entry_table(
@@ -16,20 +15,11 @@ public class database {
             type_  varchar(15),
             amount numeric(20,2),
             description varchar(100)
-
-
         );
-
-
      */
     String user = "root";
     String password = "123456";
-
-
-
-
         public void insertToDatabase (Entry e){
-
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -42,7 +32,6 @@ public class database {
                 String type = e.getType();
                 Double amount = e.getAmount();
                 String description = e.getDescription();
-
 
                 statement.executeUpdate("insert into entry_table values('" + date + "','" + type + "','" + amount + "','" + description + "')");
 

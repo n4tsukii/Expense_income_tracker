@@ -2,8 +2,9 @@ package expense_income_tracker;
 
 import java.util.*;
 import javax.swing.table.AbstractTableModel;
+import java.awt.event.MouseAdapter;
 
- public class Entry_Table extends AbstractTableModel  {
+ public class Entry_Table extends AbstractTableModel{
     
     private  List<Entry> entries;
     private final String[] columnNames = {"Date","Type", "Amount","Description"};
@@ -50,7 +51,7 @@ import javax.swing.table.AbstractTableModel;
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Entry ee = entries.get(rowIndex);
-        
+
         return switch (columnIndex) {
             case 0 -> ee.getDate();
             case 1 -> ee.getType();
@@ -58,8 +59,6 @@ import javax.swing.table.AbstractTableModel;
             case 3 -> ee.getDescription();
             default -> null;
         };
-        
-    
     }
 
     

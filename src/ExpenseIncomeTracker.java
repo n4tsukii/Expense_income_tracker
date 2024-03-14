@@ -15,7 +15,6 @@ public class ExpenseIncomeTracker {
 
         screen.displaceThis(SQLdata);
 
-
     }
 }
 

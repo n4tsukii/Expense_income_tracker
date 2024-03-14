@@ -2,22 +2,16 @@ package expense_income_tracker;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.text.*;
 import java.util.Date;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 public class Screen extends JFrame {
-    private static String formatDouble(double value) {
-        DecimalFormat decimalFormat = new DecimalFormat("#,##0");
-        return decimalFormat.format(value);
-    }
-    private static void updateDateField(JTextField dateField) {
-        Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        String formattedDate = dateFormat.format(currentDate);
-        dateField.setText(formattedDate);
-    }
-
     private final Entry_Table Model;
     private final JTable table;
     private final JTextField dateField;
@@ -28,6 +22,7 @@ public class Screen extends JFrame {
     private final JLabel balanceLabel;
     private final JButton staticButton;
     private final JComboBox<String> statictype;
+    private final JPopupMenu popupMenu;
     
     private double balance;
      public Screen(){
@@ -55,23 +50,31 @@ public class Screen extends JFrame {
         table = new JTable(Model);
         JScrollPane scrollPane = new JScrollPane(table);
         
-        table.setFillsViewportHeight(true);
-        
         dateField = new JTextField(10);
         descriptionField = new JTextField(10);
         amountField = new JTextField(10);
-        typeCombobox = new JComboBox<>(new String[] {"Expense","Income"});
+        typeCombobox = new JComboBox<>(new String[] {"Income","Expense"});
         statictype = new JComboBox<>(new String[] {"Month", "Week", "Day"});
+        popupMenu = new JPopupMenu();
 
+        JMenuItem menuItemEdit = new JMenuItem("Edit");
+        JMenuItem menuItemDel = new JMenuItem("Delete");
         staticButton = new JButton("Thong Ke");
-        addButton = new JButton("Add");
+        addButton = new JButton("Set");
         balanceLabel = new JLabel("Balance: "+ formatDouble(balance) +" VND");
-        
+        popupMenu.add(menuItemEdit);
+        popupMenu.add(menuItemDel);
+//        menuItemEdit.addActionListener(e -> EditOption());
+        menuItemDel.addActionListener(e -> DelOption());
+        table.setComponentPopupMenu(popupMenu);
         addButton.addActionListener(e -> addEntry());
         staticButton.addActionListener(e -> staticpopup());
-        
+
+        table.setComponentPopupMenu(popupMenu);
+        table.setFillsViewportHeight(true);
         
         JPanel inputPanel = new JPanel();
+
         inputPanel.add(new JLabel("Date"));
         inputPanel.add(dateField);
         updateDateField(dateField);
@@ -86,7 +89,6 @@ public class Screen extends JFrame {
         inputPanel.add(descriptionField);
 
         inputPanel.add(addButton);
-
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         bottomPanel.add(staticButton);
         bottomPanel.add(statictype);
@@ -95,6 +97,7 @@ public class Screen extends JFrame {
         add(inputPanel, BorderLayout.NORTH);
         add(bottomPanel, BorderLayout.SOUTH);
         add(scrollPane, BorderLayout.CENTER);
+
         
         setTitle("Personal Finance Tracker");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,12 +106,12 @@ public class Screen extends JFrame {
         setVisible(true);
      }
 
+
     private void staticpopup() {
         JOptionPane.showMessageDialog(null, "Balance " + formatDouble(balance) + " VND", "Thong Ke", JOptionPane.INFORMATION_MESSAGE);
     }
        
-    private void addEntry()
-    {
+    private void addEntry() {
         String date = dateField.getText();
         String description = descriptionField.getText();
         String amountStr = amountField.getText();
@@ -151,9 +154,9 @@ public class Screen extends JFrame {
         balance += amount;
 
         balanceLabel.setText("Balance: "+ formatDouble(balance) +" VND");
-
         clearInputFields();
     }
+
 
     private void clearInputFields() {
         updateDateField(dateField);
@@ -167,8 +170,30 @@ public class Screen extends JFrame {
         Model.fireTableDataChanged();
         System.out.println("WELLCOME !!");
     }
-    
+
+    private static String formatDouble(double value) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0");
+        return decimalFormat.format(value);
+    }
+    private static void updateDateField(JTextField dateField) {
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String formattedDate = dateFormat.format(currentDate);
+        dateField.setText(formattedDate);
+    }
+
+
+    private void EditOption(MouseEvent event) {
+        Point point = event.getPoint();
+        JTable model = (JTable)table.getModel();
+        int index = table.rowAtPoint(point);
+        dateField.setText(model.getValueAt(index,0).toString());
+        descriptionField.setText(model.getValueAt(index,1).toString());
+        amountField.setText(model.getValueAt(index, 2).toString());
+        typeCombobox.setSelectedItem(model.getValueAt(index, 3).toString());
+    }
+
+    private void DelOption() {
+
+    }
 }
-
-
-
