@@ -200,10 +200,13 @@ public class Screen extends JFrame {
 
 
     private void DelOption() {
-        int index = table.getSelectedRow();
-        balance -= Double.parseDouble(Model.getValueAt(index, 2).toString());
-        Model.removeRow(index);
-        balanceLabel.setText("Balance: "+ formatDouble(balance) +" VND");
-        clearInputFields();
+        if (editting) {
+            JOptionPane.showMessageDialog(this, "Complete editting first", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int index = table.getSelectedRow();
+            balance -= Double.parseDouble(Model.getValueAt(index, 2).toString());
+            Model.removeRow(index);
+            balanceLabel.setText("Balance: " + formatDouble(balance) + " VND");
+        }
     }
 }
