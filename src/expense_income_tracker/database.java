@@ -7,17 +7,23 @@ import java.util.List;
 
 public class database {
     String url = "jdbc:mysql://localhost:3306/personal_finance_tracker_database";
-    /*  viết cái này vào mySQL rồi chạy
+    Connection connection;
+    /*
+    b1 : Xóa bảng dữ liệu hiện tại bằng lệnh:
+            drop talbe entry_table;
+
+    b2: viết cái này vào mySQL rồi chạy
 
         create database personal_finance_tracker_database;
         use personal_finance_tracker_database;
         create table entry_table(
+
             date_ date,
-            type_  varchar(15),
+            type_ varchar(15),
             amount numeric(20,2),
-            description varchar(100)
+            description varchar(100),
 
-
+            id int primary key auto_increment not null
         );
 
 
@@ -44,7 +50,7 @@ public class database {
                 String description = e.getDescription();
 
 
-                statement.executeUpdate("insert into entry_table values('" + date + "','" + type + "','" + amount + "','" + description + "')");
+                statement.executeUpdate("insert into entry_table values('" + date + "','" + type + "','" + amount + "','" + description + "','" + 0  +"')");
 
                 connection.close();
                 statement.close();
@@ -56,8 +62,28 @@ public class database {
                 ex.printStackTrace();
             }
 
+        }
 
+        Statement connect() {
+            Statement statement = null;
+            try {
+                statement = connection.createStatement();
 
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null ,"Cannot connect to database", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            return statement;
+        }
+
+        ResultSet cmdExecute(String cmd) {
+            ResultSet resultSet = null;
+
+            try {
+                resultSet = connect().executeQuery(cmd);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null ,"Cannot execute SQL command", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            return resultSet;
         }
 
         // chuyển dữ liệu trả về từ database về dạng ArrayList
@@ -71,8 +97,9 @@ public class database {
                 String type = result.getString("type_");
                 Double amount = result.getDouble("amount");
                 String description = result.getString("description");
+                int id = result.getInt("id");
 
-                entry = new Entry(amount,date,type,description);
+                entry = new Entry(amount,date,type,description,id);
                 entry_table.adden(entry);
             }
             } catch (SQLException e) {
@@ -89,7 +116,7 @@ public class database {
             Entry_Table entry_table = null;
             try {
 
-                Class.forName("com.mysql.cj.jdbc.Driver");
+               // Class.forName("com.mysql.cj.jdbc.Driver");
 
                 Connection connection = DriverManager.getConnection(url, user, password);
 
@@ -101,19 +128,25 @@ public class database {
                 entry_table = this.databaseToEntryTable(result);
 
 
-                JOptionPane.showMessageDialog(null,"Success");
-                System.out.print("Success");
+                //JOptionPane.showMessageDialog(null,"Successfully retriving data from database");
+                //System.out.print("Success");
                 
                 
-            } catch (ClassNotFoundException ex) {
-                ex.printStackTrace();
+            //} catch (ClassNotFoundException ex) {
+            //    ex.printStackTrace();
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-            
+
             return entry_table;
 
+
+        }
+
+        public void removeThis(int id) {
+
+            //Class.forName("com.mysql.cj.jdbc.Driver");
 
         }
 

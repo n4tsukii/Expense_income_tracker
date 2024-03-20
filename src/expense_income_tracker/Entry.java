@@ -1,7 +1,7 @@
 package expense_income_tracker;
 
 public class Entry {
-    //public int id;
+    public int id;
     public double amount;
     public String date;
     public String type;
@@ -12,6 +12,14 @@ public class Entry {
         this.date = date;
         this.type = type;
         this.description = description;
+    }
+
+    public Entry( double amount, String date, String type, String description,int id) {
+        this.amount = amount;
+        this.date = date;
+        this.type = type;
+        this.description = description;
+        this.id = id;
     }
     public Entry() {}
 
