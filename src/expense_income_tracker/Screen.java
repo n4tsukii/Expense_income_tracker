@@ -1,34 +1,29 @@
 package expense_income_tracker;
 
+import java.util.ArrayList;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.SQLOutput;
 import java.text.*;
 import java.util.Date;
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 
 public class Screen extends JFrame {
     private final Entry_Table Model;
     private final JTable table;
-
+    boolean editting = false;
     private final JTextField dateField;
     private final JTextField descriptionField;
     private final JTextField amountField;
     private final JComboBox<String> typeCombobox;
-    private final JButton addButton;
+    private final JButton setButton;
     private final JLabel balanceLabel;
     private final JButton staticButton;
     private final JComboBox<String> statictype;
     private final JPopupMenu popupMenu;
-    
+    ArrayList<String> type = new ArrayList<String>();
+
     private double balance;
      public Screen(){
         try{
@@ -58,31 +53,24 @@ public class Screen extends JFrame {
         dateField = new JTextField(10);
         descriptionField = new JTextField(10);
         amountField = new JTextField(10);
-        typeCombobox = new JComboBox<>(new String[] {"Income","Expense"});
+        typeCombobox = new JComboBox<>(new String[] {"Income", "Expense"});
+        type.add("Income"); type.add("Expense");
         statictype = new JComboBox<>(new String[] {"Month", "Week", "Day"});
         popupMenu = new JPopupMenu();
+
 
         JMenuItem menuItemEdit = new JMenuItem("Edit");
         JMenuItem menuItemDel = new JMenuItem("Delete");
         staticButton = new JButton("Thong Ke");
-        addButton = new JButton("Set");
+        setButton = new JButton("Set");
         balanceLabel = new JLabel("Balance: "+ formatDouble(balance) +" VND");
         popupMenu.add(menuItemEdit);
         popupMenu.add(menuItemDel);
         menuItemEdit.addActionListener(e -> EditOption());
-
-//        menuItemEdit.addMouseListener(new MouseAdapter() {
-//            public void mouseReleased(MouseEvent e) {
-//                //int i = table.rowAtPoint(e.getPoint());
-//                EditOption(e);
-//
-//            }
-//        });
         menuItemDel.addActionListener(e -> DelOption());
         table.setComponentPopupMenu(popupMenu);
-        addButton.addActionListener(e -> addEntry());
+        setButton.addActionListener(e -> setEntry());
         staticButton.addActionListener(e -> staticpopup());
-
 
         table.setComponentPopupMenu(popupMenu);
         table.setFillsViewportHeight(true);
@@ -102,7 +90,7 @@ public class Screen extends JFrame {
         inputPanel.add(new JLabel("Description"));
         inputPanel.add(descriptionField);
 
-        inputPanel.add(addButton);
+        inputPanel.add(setButton);
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         bottomPanel.add(staticButton);
         bottomPanel.add(statictype);
@@ -125,7 +113,7 @@ public class Screen extends JFrame {
         JOptionPane.showMessageDialog(null, "Balance " + formatDouble(balance) + " VND", "Thong Ke", JOptionPane.INFORMATION_MESSAGE);
     }
        
-    private void addEntry() {
+    private void setEntry() {
         String date = dateField.getText();
         String description = descriptionField.getText();
         String amountStr = amountField.getText();
@@ -150,7 +138,7 @@ public class Screen extends JFrame {
         }
 
         if (balance <= 0 && amount < 0) {
-            int answer = JOptionPane.showConfirmDialog(null, "Are you sure your want to expense more !?", "Warning, Balance is low!!", JOptionPane.OK_CANCEL_OPTION);
+            int answer = JOptionPane.showConfirmDialog(null, "Are you sure your want to expense more !? Your balance is low", "Warning!!", JOptionPane.OK_CANCEL_OPTION);
             if (answer == JOptionPane.CANCEL_OPTION)
                 return ;
         }
@@ -158,14 +146,18 @@ public class Screen extends JFrame {
         //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         //date = dateFormat.format(date);
         Entry entry = new Entry(amount, date, type, description);
-
-        //insert entry to database
-        database db = new database();
-        db.insertToDatabase(entry);
-
-
-        Model.addEntry(entry);
-        balance += amount;
+        if (!editting) {
+            database db = new database();
+            db.insertToDatabase(entry);
+            Model.addEntry(entry);
+            balance += amount;
+        } else {
+            int index = table.getSelectedRow();
+            table.clearSelection();
+            Model.EditRow(index, entry);
+            balance += amount;
+            editting = false;
+        }
 
         balanceLabel.setText("Balance: "+ formatDouble(balance) +" VND");
         clearInputFields();
@@ -196,23 +188,22 @@ public class Screen extends JFrame {
         dateField.setText(formattedDate);
     }
 
-
     private void EditOption() {
-
-        TableModel model = table.getModel();
-        //int i = table.rowAtPoint(e.getPoint());
         int index = table.getSelectedRow();
-
-        System.out.println(model.getValueAt(index, 2));
-        dateField.setText(model.getValueAt(index,0).toString());
-        descriptionField.setText(model.getValueAt(index,1).toString());
-        amountField.setText(model.getValueAt(index, 2).toString());
-        typeCombobox.setSelectedItem(model.getValueAt(index, 3).toString());
-
+        balance -= Double.parseDouble(Model.getValueAt(index, 2).toString());
+        dateField.setText(Model.getValueAt(index,0).toString());
+        typeCombobox.setSelectedItem(Model.getValueAt(index, 1).toString());
+        amountField.setText(Model.getValueAt(index, 2).toString());
+        descriptionField.setText(Model.getValueAt(index, 3).toString());
+        editting = true;
     }
 
 
     private void DelOption() {
-
+        int index = table.getSelectedRow();
+        balance -= Double.parseDouble(Model.getValueAt(index, 2).toString());
+        Model.removeRow(index);
+        balanceLabel.setText("Balance: "+ formatDouble(balance) +" VND");
+        clearInputFields();
     }
 }
