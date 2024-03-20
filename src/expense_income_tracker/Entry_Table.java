@@ -42,6 +42,7 @@ public class Entry_Table  extends AbstractTableModel {
      public int getRowCount() {
          return entries.size();
      }
+     public Entry getEntry(int index) {return entries.get(index);}
 
      @Override
      public int getColumnCount() {
@@ -61,6 +62,7 @@ public class Entry_Table  extends AbstractTableModel {
             case 1 -> ee.getType();
             case 2 -> ee.getAmount();
             case 3 -> ee.getDescription();
+
             default -> null;
         };
     }

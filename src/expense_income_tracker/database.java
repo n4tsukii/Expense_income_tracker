@@ -14,8 +14,7 @@ public class database {
 
     b2: viết cái này vào mySQL rồi chạy
 
-        create database personal_finance_tracker_database;
-        use personal_finance_tracker_database;
+
         create table entry_table(
 
             date_ date,
@@ -131,6 +130,13 @@ public class database {
             String cmd = "delete from entry_table where id = " + id;
             cmdExecute(cmd);
 
+        }
+        public void editEntry(int index, Entry entry) {
+            String date = entry.getDate();
+            Double amount = entry.getAmount();
+            String type = entry.getType();
+            String des = entry.getDescription();
+
 
         }
 
@@ -142,13 +148,15 @@ public class database {
                 if (resultSet.next()) {
 
                     balance = resultSet.getDouble("total_balance");
-                    System.out.println(balance);
+
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
             return balance;
         }
+
+
 
 
 

@@ -149,19 +149,19 @@ public class Screen extends JFrame {
         //date = dateFormat.format(date);
         Entry entry = new Entry(amount, date, type, description);
         if (!editting) {
-            //database db = new database();
             db.insertToDatabase(entry);
             Model.addEntry(entry);
-            balance += amount;
+
         } else {
             int index = table.getSelectedRow();
             table.clearSelection();
             Model.EditRow(index, entry);
-            balance += amount;
+
             editting = false;
         }
-
+        balance += amount;
         balanceLabel.setText("Balance: "+ formatDouble(balance) +" VND");
+        //reload();
         clearInputFields();
     }
 
@@ -180,7 +180,7 @@ public class Screen extends JFrame {
     }
 
     public void reload() {
-         database db = new database();
+         //database db = new database();
          displaceThis(db.returnAll());
     }
 
@@ -213,6 +213,7 @@ public class Screen extends JFrame {
             int index = table.getSelectedRow();
             balance -= Double.parseDouble(Model.getValueAt(index, 2).toString());
             Model.removeRow(index);
+            db.removeThis(Model.getEntry(index).getID());
             balanceLabel.setText("Balance: " + formatDouble(balance) + " VND");
         }
     }

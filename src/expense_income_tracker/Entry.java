@@ -37,6 +37,7 @@ public class Entry {
     public String getDescription() {
         return description;
     }
+    public int getID() {return id;}
 
     public void setAmount(double amount) {
         this.amount = amount;
