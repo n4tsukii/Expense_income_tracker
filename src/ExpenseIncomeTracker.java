@@ -10,11 +10,13 @@ public class ExpenseIncomeTracker {
 
         screen.setLocationRelativeTo(null);
 
-        database db = new database();
-        Entry_Table SQLdata = db.returnAll();
+          database db = new database();
+//        Entry_Table SQLdata = db.returnAll();
+//
+//        screen.displaceThis(SQLdata);
 
-        screen.displaceThis(SQLdata);
-
+        screen.reload();
+        db.balanceCheck();
     }
 }
 

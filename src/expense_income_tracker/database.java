@@ -32,16 +32,16 @@ public class database {
     String password = "123456";
 
 
-
+//  để cái này ở đây phòng khi cần:  Class.forName("com.mysql.cj.jdbc.Driver");
 
         public void insertToDatabase (Entry e){
 
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
 
-                Connection connection = DriverManager.getConnection(url, user, password);
+                Connection connection2 = DriverManager.getConnection(url, user, password);
 
-                Statement statement = connection.createStatement();
+                Statement statement = connection2.createStatement();
 
 
                 String date = e.getDate();
@@ -52,7 +52,8 @@ public class database {
 
                 statement.executeUpdate("insert into entry_table values('" + date + "','" + type + "','" + amount + "','" + description + "','" + 0  +"')");
 
-                connection.close();
+
+                connection2.close();
                 statement.close();
 
             } catch (ClassNotFoundException ex) {
@@ -64,9 +65,12 @@ public class database {
 
         }
 
-        Statement connect() {
+
+
+        private Statement connect() {
             Statement statement = null;
             try {
+                connection = DriverManager.getConnection(url,user,password);
                 statement = connection.createStatement();
 
             } catch (SQLException ex) {
@@ -75,11 +79,12 @@ public class database {
             return statement;
         }
 
-        ResultSet cmdExecute(String cmd) {
+        private ResultSet cmdExecute(String cmd) {
             ResultSet resultSet = null;
+            Statement statement = connect();
 
             try {
-                resultSet = connect().executeQuery(cmd);
+                resultSet = statement.executeQuery(cmd);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null ,"Cannot execute SQL command", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -113,41 +118,36 @@ public class database {
 
 
         public Entry_Table returnAll(){
+            String cmd = "select * from entry_table";
+
             Entry_Table entry_table = null;
-            try {
-
-               // Class.forName("com.mysql.cj.jdbc.Driver");
-
-                Connection connection = DriverManager.getConnection(url, user, password);
-
-                Statement statement = connection.createStatement();
-
-                String cmd = "select * from entry_table";
-                ResultSet result = statement.executeQuery(cmd);
-
-                entry_table = this.databaseToEntryTable(result);
-
-
-                //JOptionPane.showMessageDialog(null,"Successfully retriving data from database");
-                //System.out.print("Success");
-                
-                
-            //} catch (ClassNotFoundException ex) {
-            //    ex.printStackTrace();
-
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-
+            ResultSet result = cmdExecute(cmd);
+            entry_table = this.databaseToEntryTable(result);
             return entry_table;
+        }
+
+
+        public void removeThis(int id) {
+            String cmd = "delete from entry_table where id = " + id;
+            cmdExecute(cmd);
 
 
         }
 
-        public void removeThis(int id) {
+        public double balanceCheck() {
+            String cmd = "select sum(amount) as total_balance from entry_table";
+            ResultSet resultSet =  cmdExecute(cmd);
+            double balance =0.0;
+            try {
+                if (resultSet.next()) {
 
-            //Class.forName("com.mysql.cj.jdbc.Driver");
-
+                    balance = resultSet.getDouble("total_balance");
+                    System.out.println(balance);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return balance;
         }
 
 

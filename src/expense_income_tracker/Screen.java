@@ -25,6 +25,8 @@ public class Screen extends JFrame {
     ArrayList<String> type = new ArrayList<String>();
 
     private double balance;
+
+    private database db = new database();
      public Screen(){
         try{
             UIManager.setLookAndFeel(new FlatDarkLaf());
@@ -44,7 +46,7 @@ public class Screen extends JFrame {
         UIManager.put("Button.background", Color.ORANGE);
         UIManager.put("Label.foreground", Color.WHITE);
 
-        balance = 0.0;
+        balance = db.balanceCheck();
         
         Model = new Entry_Table();
         table = new JTable(Model);
@@ -147,7 +149,7 @@ public class Screen extends JFrame {
         //date = dateFormat.format(date);
         Entry entry = new Entry(amount, date, type, description);
         if (!editting) {
-            database db = new database();
+            //database db = new database();
             db.insertToDatabase(entry);
             Model.addEntry(entry);
             balance += amount;
@@ -175,6 +177,11 @@ public class Screen extends JFrame {
         Model.updateEntryTable(new_table.returnAllEntries());
         Model.fireTableDataChanged();
         System.out.println("WELLCOME !!");
+    }
+
+    public void reload() {
+         database db = new database();
+         displaceThis(db.returnAll());
     }
 
     private static String formatDouble(double value) {

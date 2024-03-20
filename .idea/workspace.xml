@@ -7,7 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe14be07-b2ae-46a3-80f9-8a9353a0f7c5" name="Changes" comment="complete add and del function">
+    <list default="true" id="fe14be07-b2ae-46a3-80f9-8a9353a0f7c5" name="Changes" comment="database connection and execute function">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_03_2024_03_15_pm_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_03_2024_03_15_pm__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExpenseIncomeTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExpenseIncomeTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/expense_income_tracker/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/expense_income_tracker/Screen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/expense_income_tracker/database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/expense_income_tracker/database.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,6 +120,7 @@
       <workItem from="1710531358904" duration="521000" />
       <workItem from="1710930720629" duration="1990000" />
       <workItem from="1710933912498" duration="1368000" />
+      <workItem from="1710937548188" duration="3877000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -204,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710934994951</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="database connection and execute function">
+      <option name="closed" value="true" />
+      <created>1710936847297</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1710936847297</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,7 +246,8 @@
     <MESSAGE value="..." />
     <MESSAGE value="small reconfig" />
     <MESSAGE value="complete add and del function" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete add and del function" />
+    <MESSAGE value="database connection and execute function" />
+    <option name="LAST_COMMIT_MESSAGE" value="database connection and execute function" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
