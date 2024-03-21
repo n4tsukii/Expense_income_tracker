@@ -9,6 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fe14be07-b2ae-46a3-80f9-8a9353a0f7c5" name="Changes" comment="search button">
       <change beforePath="$PROJECT_DIR$/src/expense_income_tracker/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/expense_income_tracker/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/expense_income_tracker/database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/expense_income_tracker/database.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

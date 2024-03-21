@@ -69,7 +69,6 @@ public class database {
         private Statement connect() {
             Statement statement = null;
             try {
-
                 connection = DriverManager.getConnection(url,user,password);
                 statement = connection.createStatement();
             } catch (SQLException ex) {

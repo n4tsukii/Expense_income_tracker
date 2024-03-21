@@ -219,11 +219,16 @@ public class Screen extends JFrame {
     }
 
     public void search() {
-        String date = dateField.getText();
-        String description = descriptionField.getText();
-        String amountStr = amountField.getText();
-        String type = (String)typeCombobox.getSelectedItem();
-        double amount = Double.parseDouble(amountStr);
+        if (editting) {
+            JOptionPane.showMessageDialog(this, "Complete editting first", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int index = table.getSelectedRow();
+            String date = Model.getValueAt(index, 0).toString();
+            String type = Model.getValueAt(index, 1).toString();
+            double amount = Double.parseDouble(Model.getValueAt(index, 2).toString());
+            String des = Model.getValueAt(index, 3).toString();
+            JTable newtable = new JTable((TableModel) Model.searchby(date, type, amount, des));
 
+        }
     }
 }
