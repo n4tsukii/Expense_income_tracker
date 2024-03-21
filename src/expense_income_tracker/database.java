@@ -80,13 +80,17 @@ public class database {
 
         private ResultSet cmdExecute(String cmd) {
             ResultSet resultSet = null;
-            Statement statement = connect();
+            Statement statement;
 
             try {
+                statement = connect();
                 resultSet = statement.executeQuery(cmd);
+
+
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null ,"Cannot execute SQL command", "Error", JOptionPane.ERROR_MESSAGE);
             }
+
             return resultSet;
         }
 
@@ -97,9 +101,9 @@ public class database {
 
             try {
             while(result.next()) {
-                String date = result.getString("date_");
-                String type = result.getString("type_");
-                Double amount = result.getDouble("amount");
+                String date = result.getString("date");
+                String type = result.getString("type");
+                double amount = result.getDouble("amount");
                 String description = result.getString("description");
                 int id = result.getInt("id");
 
@@ -154,6 +158,10 @@ public class database {
                 throw new RuntimeException(e);
             }
             return balance;
+        }
+
+        void search() {
+
         }
 
 

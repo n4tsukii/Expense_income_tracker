@@ -18,6 +18,7 @@ public class Screen extends JFrame {
     private final JTextField amountField;
     private final JComboBox<String> typeCombobox;
     private final JButton setButton;
+    private final JButton searchButton;
     private final JLabel balanceLabel;
     private final JButton staticButton;
     private final JComboBox<String> statictype;
@@ -65,6 +66,7 @@ public class Screen extends JFrame {
         JMenuItem menuItemDel = new JMenuItem("Delete");
         staticButton = new JButton("Thong Ke");
         setButton = new JButton("Set");
+        searchButton = new JButton("Search");
         balanceLabel = new JLabel("Balance: "+ formatDouble(balance) +" VND");
         popupMenu.add(menuItemEdit);
         popupMenu.add(menuItemDel);
@@ -72,6 +74,7 @@ public class Screen extends JFrame {
         menuItemDel.addActionListener(e -> DelOption());
         table.setComponentPopupMenu(popupMenu);
         setButton.addActionListener(e -> setEntry());
+        searchButton.addActionListener(e -> search());
         staticButton.addActionListener(e -> staticpopup());
 
         table.setComponentPopupMenu(popupMenu);
@@ -93,6 +96,7 @@ public class Screen extends JFrame {
         inputPanel.add(descriptionField);
 
         inputPanel.add(setButton);
+        inputPanel.add(searchButton);
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         bottomPanel.add(staticButton);
         bottomPanel.add(statictype);
@@ -216,5 +220,9 @@ public class Screen extends JFrame {
             db.removeThis(Model.getEntry(index).getID());
             balanceLabel.setText("Balance: " + formatDouble(balance) + " VND");
         }
+    }
+
+    public void search() {
+
     }
 }
