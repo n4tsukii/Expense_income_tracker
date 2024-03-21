@@ -69,9 +69,9 @@ public class database {
         private Statement connect() {
             Statement statement = null;
             try {
+
                 connection = DriverManager.getConnection(url,user,password);
                 statement = connection.createStatement();
-
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null ,"Cannot connect to database", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -97,9 +97,9 @@ public class database {
 
             try {
             while(result.next()) {
-                String date = result.getString("date_");
-                String type = result.getString("type_");
-                Double amount = result.getDouble("amount");
+                String date = result.getString("date");
+                String type = result.getString("type");
+                double amount = result.getDouble("amount");
                 String description = result.getString("description");
                 int id = result.getInt("id");
 

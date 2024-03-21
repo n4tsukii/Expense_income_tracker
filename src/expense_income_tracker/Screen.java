@@ -34,7 +34,6 @@ public class Screen extends JFrame {
         catch(Exception ex){
             System.err.println("Failed to Set FlatDarkLaf LookAndFeel");
         }
-        
        
         UIManager.put("TextField.foreground", Color.WHITE);
         UIManager.put("TextField.background", Color.DARK_GRAY);
@@ -47,7 +46,6 @@ public class Screen extends JFrame {
         UIManager.put("Label.foreground", Color.WHITE);
 
         balance = db.balanceCheck();
-        
         Model = new Entry_Table();
         table = new JTable(Model);
         JScrollPane scrollPane = new JScrollPane(table);
@@ -102,7 +100,6 @@ public class Screen extends JFrame {
         add(bottomPanel, BorderLayout.SOUTH);
         add(scrollPane, BorderLayout.CENTER);
 
-        
         setTitle("Personal Finance Tracker");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -204,7 +201,6 @@ public class Screen extends JFrame {
         descriptionField.setText(Model.getValueAt(index, 3).toString());
         editting = true;
     }
-
 
     private void DelOption() {
         if (editting) {
