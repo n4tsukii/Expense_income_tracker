@@ -7,11 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe14be07-b2ae-46a3-80f9-8a9353a0f7c5" name="Changes" comment="implement remove to Screen.java and some minor changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/expense_income_tracker/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/expense_income_tracker/Screen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/expense_income_tracker/database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/expense_income_tracker/database.java" afterDir="false" />
-    </list>
+    <list default="true" id="fe14be07-b2ae-46a3-80f9-8a9353a0f7c5" name="Changes" comment="search button" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,6 +115,7 @@
       <workItem from="1710933912498" duration="1368000" />
       <workItem from="1710937548188" duration="4753000" />
       <workItem from="1710943380145" duration="8954000" />
+      <workItem from="1710984960569" duration="299000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -232,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710949657269</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="search button">
+      <option name="closed" value="true" />
+      <created>1710985220604</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1710985220605</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,7 +268,8 @@
     <MESSAGE value="database connection and execute function" />
     <MESSAGE value="reload() -&gt; Screen reload function&#10;balanceCheck() -&gt; return total Balance from database" />
     <MESSAGE value="implement remove to Screen.java and some minor changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement remove to Screen.java and some minor changes" />
+    <MESSAGE value="search button" />
+    <option name="LAST_COMMIT_MESSAGE" value="search button" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
