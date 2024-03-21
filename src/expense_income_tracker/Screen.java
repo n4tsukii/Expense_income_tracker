@@ -219,6 +219,11 @@ public class Screen extends JFrame {
     }
 
     public void search() {
+        String date = dateField.getText();
+        String description = descriptionField.getText();
+        String amountStr = amountField.getText();
+        String type = (String)typeCombobox.getSelectedItem();
+        double amount = Double.parseDouble(amountStr);
 
     }
 }
