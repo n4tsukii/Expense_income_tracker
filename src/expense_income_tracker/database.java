@@ -69,9 +69,9 @@ public class database {
         private Statement connect() {
             Statement statement = null;
             try {
+
                 connection = DriverManager.getConnection(url,user,password);
                 statement = connection.createStatement();
-
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null ,"Cannot connect to database", "Error", JOptionPane.ERROR_MESSAGE);
             }
