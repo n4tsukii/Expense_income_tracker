@@ -159,12 +159,13 @@ public class Screen extends JFrame {
         } else {
             int index = table.getSelectedRow();
             table.clearSelection();
+            db.editEntry(Model.getEntry(index).getID(),entry);
             Model.EditRow(index, entry);
 
             editting = false;
         }
-        balance += amount;
-        balanceLabel.setText("Balance: "+ formatDouble(balance) +" VND");
+        balanceUpdate();
+
         //reload();
         clearInputFields();
     }
@@ -180,12 +181,19 @@ public class Screen extends JFrame {
     public void displaceThis(Entry_Table new_table) {
         Model.updateEntryTable(new_table.returnAllEntries());
         Model.fireTableDataChanged();
-        System.out.println("WELLCOME !!");
+        //System.out.println("WELLCOME !!");
+    }
+
+    public void balanceUpdate() {
+        balance = db.balanceCheck();
+        balanceLabel.setText("Balance: "+ formatDouble(balance) +" VND");
     }
 
     public void reload() {
          //database db = new database();
          displaceThis(db.returnAll());
+         balanceUpdate();
+
     }
 
     private static String formatDouble(double value) {
@@ -216,8 +224,9 @@ public class Screen extends JFrame {
         } else {
             int index = table.getSelectedRow();
             balance -= Double.parseDouble(Model.getValueAt(index, 2).toString());
+            int id = Model.getEntry(index).getID();
             Model.removeRow(index);
-            db.removeThis(Model.getEntry(index).getID());
+            db.removeThis(id);
             balanceLabel.setText("Balance: " + formatDouble(balance) + " VND");
         }
     }

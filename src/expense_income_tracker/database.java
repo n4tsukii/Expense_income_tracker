@@ -83,11 +83,13 @@ public class database {
             Statement statement;
 
             try {
+                boolean worked = false;
                 statement = connect();
-                resultSet = statement.executeQuery(cmd);
-
-
-            } catch (SQLException ex) {
+                worked = statement.execute(cmd);
+                if (worked) {
+                    resultSet = statement.getResultSet();
+                }
+            }catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null ,"Cannot execute SQL command", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
