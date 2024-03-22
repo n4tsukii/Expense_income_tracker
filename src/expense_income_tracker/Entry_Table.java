@@ -10,12 +10,23 @@ public class Entry_Table  extends AbstractTableModel {
     public Entry_Table() {
         entries = new ArrayList<>();
     }
-    //@Override
+
+    public List<Entry> searchby(String date, String type, double amount, String des) {
+        List<Entry> result = new ArrayList<Entry>();
+        Entry temp = new Entry(amount, date, type, des);
+        for(Entry entry : entries) {
+           if (entry.equals(temp)) {
+                result.add(entry);
+           }
+        }
+        return result;
+    }
+
     public void addEntry(Entry ee) {
         entries.add(ee);
         fireTableRowsInserted(entries.size()-1,entries.size()-1);
     }
-    //@Override
+
     public void adden(Entry ee) {
         entries.add(ee);
     }
@@ -28,17 +39,16 @@ public class Entry_Table  extends AbstractTableModel {
         entries.remove(index);
     }
 
-    //@Override
+
     public void updateEntryTable(List<Entry> newList) {
         this.entries = newList;
         //fireTableDataChanged();
     }
-    //@Override
+
     public List<Entry> returnAllEntries() {
         return entries;
     }
 
-     //@Override
      public int getRowCount() {
          return entries.size();
      }
