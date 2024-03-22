@@ -91,6 +91,7 @@ public class database {
                 }
             }catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null ,"Cannot execute SQL command", "Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
             }
 
             return resultSet;
@@ -137,12 +138,14 @@ public class database {
             cmdExecute(cmd);
 
         }
-        public void editEntry(int index, Entry entry) {
+        public void editEntry(int id, Entry entry) {
             String date = entry.getDate();
             Double amount = entry.getAmount();
             String type = entry.getType();
             String des = entry.getDescription();
 
+            String cmd = "update entry_table set date = \""+date+"\", type = \""+type+"\", amount = "+amount+", description = \""+des+ "\" where id = "+id  ;
+            cmdExecute(cmd);
 
         }
 
