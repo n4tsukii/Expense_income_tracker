@@ -216,8 +216,9 @@ public class Screen extends JFrame {
         } else {
             int index = table.getSelectedRow();
             balance -= Double.parseDouble(Model.getValueAt(index, 2).toString());
+            int id = Model.getEntry(index).getID();
             Model.removeRow(index);
-            db.removeThis(Model.getEntry(index).getID());
+            db.removeThis(id);
             balanceLabel.setText("Balance: " + formatDouble(balance) + " VND");
         }
     }
