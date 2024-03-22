@@ -8,6 +8,8 @@ import java.util.List;
 public class database {
     String url = "jdbc:mysql://localhost:3306/personal_finance_tracker_database";
     Connection connection;
+    Statement statement ;
+    ResultSet result ;
     /*
     b1 : Xóa bảng dữ liệu hiện tại bằng lệnh:
             drop talbe entry_table;
@@ -38,22 +40,24 @@ public class database {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
 
-                Connection connection2 = DriverManager.getConnection(url, user, password);
+                //Connection connection;
+                connection = DriverManager.getConnection(url, user, password);
 
-                Statement statement = connection2.createStatement();
+                //Statement statement;
+                statement = connection.createStatement();
 
 
                 String date = e.getDate();
                 String type = e.getType();
-                Double amount = e.getAmount();
+                double amount = e.getAmount();
                 String description = e.getDescription();
 
 
                 statement.executeUpdate("insert into entry_table values('" + date + "','" + type + "','" + amount + "','" + description + "','" + 0  +"')");
 
 
-                connection2.close();
-                statement.close();
+//                connection.close();
+//                statement.close();
 
             } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
@@ -67,7 +71,7 @@ public class database {
 
 
         private Statement connect() {
-            Statement statement = null;
+            //Statement statement = null;
             try {
                 connection = DriverManager.getConnection(url,user,password);
                 statement = connection.createStatement();
@@ -79,19 +83,23 @@ public class database {
         }
 
         private ResultSet cmdExecute(String cmd) {
-            ResultSet resultSet = null;
-            Statement statement;
+            //ResultSet resultSet = null;
+            //Statement statement;
 
             try {
+                boolean worked = false;
                 statement = connect();
-                resultSet = statement.executeQuery(cmd);
-
-
+                System.out.println(cmd);
+                worked = statement.execute(cmd);
+                if(worked) {
+                    result = statement.getResultSet();
+                }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null ,"Cannot execute SQL command", "Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
             }
 
-            return resultSet;
+            return result;
         }
 
         // chuyển dữ liệu trả về từ database về dạng ArrayList
@@ -117,6 +125,17 @@ public class database {
             return entry_table;
         }
 
+        private void closing() {
+
+//            try {
+//                result.close();
+//                statement.close();
+//                connection.close();
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+        }
+
 
 
 
@@ -124,17 +143,25 @@ public class database {
             String cmd = "select * from entry_table";
 
             Entry_Table entry_table = null;
-            ResultSet result = cmdExecute(cmd);
+            //ResultSet result = cmdExecute(cmd);
+            result = cmdExecute(cmd);
             entry_table = this.databaseToEntryTable(result);
+
+            closing();
             return entry_table;
         }
 
 
         public void removeThis(int id) {
-            String cmd = "delete from entry_table where id = " + id;
+            String cmd = "delete from entry_table where id = "+ id;
+
             cmdExecute(cmd);
+            closing();
 
         }
+
+
+
         public void editEntry(int index, Entry entry) {
             String date = entry.getDate();
             Double amount = entry.getAmount();
@@ -146,17 +173,19 @@ public class database {
 
         public double balanceCheck() {
             String cmd = "select sum(amount) as total_balance from entry_table";
-            ResultSet resultSet =  cmdExecute(cmd);
+            //ResultSet result;
+            result =  cmdExecute(cmd);
             double balance =0.0;
             try {
-                if (resultSet.next()) {
+                if (result.next()) {
 
-                    balance = resultSet.getDouble("total_balance");
+                    balance = result.getDouble("total_balance");
 
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+            closing();
             return balance;
         }
 
