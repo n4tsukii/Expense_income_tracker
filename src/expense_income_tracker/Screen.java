@@ -116,7 +116,7 @@ public class Screen extends JFrame {
         bot1.add(balanceLabel, BorderLayout.WEST);
 
 
-        searchField = new JTextField(10);
+        searchField = new JTextField(30);
         bot2.add(searchField);
         bot2.add(searchButton);
 
