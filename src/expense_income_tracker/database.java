@@ -83,13 +83,8 @@ public class database {
             Statement statement;
 
             try {
-                boolean worked = false;
                 statement = connect();
-                worked = statement.execute(cmd);
-                if(worked) {
-                    resultSet = statement.getResultSet();
-                }
-
+                resultSet = statement.executeQuery(cmd);
 
 
             } catch (SQLException ex) {
