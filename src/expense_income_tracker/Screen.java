@@ -100,15 +100,26 @@ public class Screen extends JFrame {
 
         inputPanel.add(setButton);
         //inputPanel.add(searchButton);
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        //JPanel bottomPanel = new JPanel();
-        bottomPanel.add(staticButton);
-        bottomPanel.add(statictype);
-        bottomPanel.add(balanceLabel, BorderLayout.EAST);
+        //JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel bottomPanel = new JPanel();
+
+
+        JPanel bot1= new JPanel(new FlowLayout(FlowLayout.LEFT)) ;
+        JPanel bot2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        BoxLayout boxLayout = new BoxLayout(bottomPanel,BoxLayout.X_AXIS) ;
+        bottomPanel.setLayout(boxLayout);
+
+        bot1.add(staticButton,BorderLayout.WEST);
+        bot1.add(statictype,BorderLayout.WEST);
+        bot1.add(balanceLabel, BorderLayout.WEST);
+
 
         searchField = new JTextField(10);
-        bottomPanel.add(searchField);
-        bottomPanel.add(searchButton,BorderLayout.EAST);
+        bot2.add(searchField);
+        bot2.add(searchButton);
+
+        bottomPanel.add(bot1);
+        bottomPanel.add(bot2);
         
         add(inputPanel, BorderLayout.NORTH);
         add(bottomPanel, BorderLayout.SOUTH);
