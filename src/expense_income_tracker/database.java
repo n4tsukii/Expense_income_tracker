@@ -124,7 +124,7 @@ public class database {
 
 
         public Entry_Table returnAll(){
-            String cmd = "select * from entry_table";
+            String cmd = "select * from entry_table order by date";
 
             Entry_Table entry_table = null;
             ResultSet result = cmdExecute(cmd);

@@ -19,6 +19,7 @@ public class Screen extends JFrame {
     private final JComboBox<String> typeCombobox;
     private final JButton setButton;
     private final JButton searchButton;
+    private final JTextField searchField;
     private final JLabel balanceLabel;
     private final JButton staticButton;
     private final JComboBox<String> statictype;
@@ -27,7 +28,7 @@ public class Screen extends JFrame {
 
     private double balance;
 
-    private static String date_format = "yyyy/MM/dd";
+    private static String date_format = "yyyy-MM-dd";
 
     private database db = new database();
      public Screen(){
@@ -98,11 +99,16 @@ public class Screen extends JFrame {
         inputPanel.add(descriptionField);
 
         inputPanel.add(setButton);
-        inputPanel.add(searchButton);
+        //inputPanel.add(searchButton);
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        //JPanel bottomPanel = new JPanel();
         bottomPanel.add(staticButton);
         bottomPanel.add(statictype);
         bottomPanel.add(balanceLabel, BorderLayout.EAST);
+
+        searchField = new JTextField(10);
+        bottomPanel.add(searchField);
+        bottomPanel.add(searchButton,BorderLayout.EAST);
         
         add(inputPanel, BorderLayout.NORTH);
         add(bottomPanel, BorderLayout.SOUTH);
