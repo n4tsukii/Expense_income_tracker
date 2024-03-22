@@ -1,16 +1,19 @@
 package expense_income_tracker;
 
+import javax.swing.table.TableRowSorter;
 import java.util.ArrayList;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.*;
 import java.text.*;
 import java.util.Date;
 import javax.swing.*;
-import javax.swing.table.TableModel;
+import javax.swing.RowFilter;
+import javax.swing.table.*;
 
 
 public class Screen extends JFrame {
-    private final Entry_Table Model;
+    private final Entry_Table Model = new Entry_Table();
+    private final TableRowSorter<Entry_Table> sorter = new TableRowSorter<Entry_Table>(Model);
     private final JTable table;
     boolean editting = false;
     private final JTextField dateField;
@@ -25,7 +28,6 @@ public class Screen extends JFrame {
     private final JComboBox<String> statictype;
     private final JPopupMenu popupMenu;
     ArrayList<String> type = new ArrayList<String>();
-
     private double balance;
 
     private static String date_format = "yyyy-MM-dd";
@@ -51,11 +53,11 @@ public class Screen extends JFrame {
         UIManager.put("Label.foreground", Color.WHITE);
 
         balance = db.balanceCheck();
-        
-        Model = new Entry_Table();
+
         table = new JTable(Model);
+        table.setRowSorter(sorter);
         JScrollPane scrollPane = new JScrollPane(table);
-        
+
         dateField = new JTextField(10);
         descriptionField = new JTextField(10);
         amountField = new JTextField(10);
@@ -260,14 +262,10 @@ public class Screen extends JFrame {
         if (editting) {
             JOptionPane.showMessageDialog(this, "Complete editting first", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            int index = table.getSelectedRow();
-            String date = Model.getValueAt(index, 0).toString();
-            String type = Model.getValueAt(index, 1).toString();
-            double amount = Double.parseDouble(Model.getValueAt(index, 2).toString());
-            String des = Model.getValueAt(index, 3).toString();
-            Entry temp = new Entry(amount, date, type, des);
-            Entry_Table result = Model.searchby(temp);
-            displaceThis(result);
+            String text = searchField.getText();
+            if (!text.isEmpty()) {
+                sorter.getRowFilter(RowFilter.regexFilter(text));
+            }
         }
     }
 }
