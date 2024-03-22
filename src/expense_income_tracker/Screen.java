@@ -27,6 +27,8 @@ public class Screen extends JFrame {
 
     private double balance;
 
+    private static String date_format = "yyyy/MM/dd";
+
     private database db = new database();
      public Screen(){
         try{
@@ -126,6 +128,10 @@ public class Screen extends JFrame {
         String type = (String)typeCombobox.getSelectedItem();
         double amount;
 
+        if(!isDateValid(date)) {
+            return;
+        }
+
         if(amountStr.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter the Amount", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -178,6 +184,19 @@ public class Screen extends JFrame {
         typeCombobox.setSelectedIndex(0);
     }
 
+    public static boolean isDateValid(String date)
+    {
+        try {
+            DateFormat df = new SimpleDateFormat(date_format);
+            df.setLenient(false);
+            df.parse(date);
+            return true;
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null,"incorrect date or date formate","Error",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
     public void displaceThis(Entry_Table new_table) {
         Model.updateEntryTable(new_table.returnAllEntries());
         Model.fireTableDataChanged();
@@ -202,7 +221,7 @@ public class Screen extends JFrame {
     }
     private static void updateDateField(JTextField dateField) {
         Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(date_format);
         String formattedDate = dateFormat.format(currentDate);
         dateField.setText(formattedDate);
     }
