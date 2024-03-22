@@ -12,6 +12,7 @@ import javax.swing.table.TableModel;
 public class Screen extends JFrame {
     private final Entry_Table Model;
     private final JTable table;
+    JScrollPane scrollPane;
     boolean editting = false;
     private final JTextField dateField;
     private final JTextField descriptionField;
@@ -49,7 +50,7 @@ public class Screen extends JFrame {
         balance = db.balanceCheck();
         Model = new Entry_Table();
         table = new JTable(Model);
-        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane = new JScrollPane(table);
         
         dateField = new JTextField(10);
         descriptionField = new JTextField(10);
@@ -234,8 +235,9 @@ public class Screen extends JFrame {
             String type = Model.getValueAt(index, 1).toString();
             double amount = Double.parseDouble(Model.getValueAt(index, 2).toString());
             String des = Model.getValueAt(index, 3).toString();
-            JTable newtable = new JTable((TableModel) Model.searchby(date, type, amount, des));
-
+            Entry temp = new Entry(amount, date, type, des);
+            Entry_Table result = Model.searchby(temp);
+            displaceThis(result);
         }
     }
 }

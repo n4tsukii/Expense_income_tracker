@@ -1,5 +1,7 @@
 package expense_income_tracker;
 
+import java.util.Objects;
+
 public class Entry {
     public int id;
     public double amount;
@@ -49,6 +51,23 @@ public class Entry {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean contain(Entry e) {
+        if (this.date.contains(e.date)) {
+            return true;
+        }
+        if (Objects.equals(this.type, e.type)) {
+            return true;
+        }
+        if (this.amount == e.amount) {
+            return true;
+        }
+        if (this.description.contains(e.description)) {
+            return true;
+        }
+
+        return false;
     }
 
     public void setDescription(String description) {

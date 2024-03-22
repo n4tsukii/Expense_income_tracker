@@ -1,5 +1,7 @@
 package expense_income_tracker;
 
+//import jdk.internal.jmod.JmodFile;
+
 import javax.swing.table.AbstractTableModel;
 import java.util.*;
 
@@ -11,12 +13,11 @@ public class Entry_Table  extends AbstractTableModel {
         entries = new ArrayList<>();
     }
 
-    public List<Entry> searchby(String date, String type, double amount, String des) {
-        List<Entry> result = new ArrayList<Entry>();
-        Entry temp = new Entry(amount, date, type, des);
+    public Entry_Table searchby(Entry temp) {
+        Entry_Table result = new Entry_Table();
         for(Entry entry : entries) {
-           if (entry.equals(temp)) {
-                result.add(entry);
+           if (entry.contain(temp)) {
+                result.adden(entry);
            }
         }
         return result;
