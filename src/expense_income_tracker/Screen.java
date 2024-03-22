@@ -251,6 +251,17 @@ public class Screen extends JFrame {
     }
 
     public void search() {
-
+        if (editting) {
+            JOptionPane.showMessageDialog(this, "Complete editting first", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int index = table.getSelectedRow();
+            String date = Model.getValueAt(index, 0).toString();
+            String type = Model.getValueAt(index, 1).toString();
+            double amount = Double.parseDouble(Model.getValueAt(index, 2).toString());
+            String des = Model.getValueAt(index, 3).toString();
+            Entry temp = new Entry(amount, date, type, des);
+            Entry_Table result = Model.searchby(temp);
+            displaceThis(result);
+        }
     }
 }
