@@ -81,6 +81,7 @@ public class database {
         private ResultSet cmdExecute(String cmd) {
             ResultSet resultSet = null;
             Statement statement;
+            System.out.println(cmd);
 
             try {
                 boolean worked = false;
@@ -165,7 +166,12 @@ public class database {
             return balance;
         }
 
-        void search() {
+        public Entry_Table search(String text) {
+            String cmd = "select * from entry_table where date like \"%"+text+"%\" or type like \"%"+text+"%\" or amount like \"%"+text+"%\" or description like \"%"+text+"%\" order by date";
+            ResultSet result = cmdExecute(cmd);
+
+            return databaseToEntryTable(result);
+
 
         }
 

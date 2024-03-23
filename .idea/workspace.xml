@@ -7,9 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe14be07-b2ae-46a3-80f9-8a9353a0f7c5" name="Changes" comment="search button and searchBox">
+    <list default="true" id="fe14be07-b2ae-46a3-80f9-8a9353a0f7c5" name="Changes" comment="vẫn là bottomPanel nhưng nhìn xịn sò hơn 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/expense_income_tracker/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/expense_income_tracker/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/expense_income_tracker/database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/expense_income_tracker/database.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +68,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "settings.editor.selected.configurable": "inlay.hints",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -118,6 +119,7 @@
       <workItem from="1710933912498" duration="1368000" />
       <workItem from="1710937548188" duration="4753000" />
       <workItem from="1710943380145" duration="8954000" />
+      <workItem from="1711170480044" duration="5479000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -263,7 +265,23 @@
       <option name="project" value="LOCAL" />
       <updated>1711113336965</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="vẫn là bottomPanel nhưng nhìn xịn sò hơn">
+      <option name="closed" value="true" />
+      <created>1711122658129</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1711122658129</updated>
+    </task>
+    <task id="LOCAL-00020" summary="vẫn là bottomPanel nhưng nhìn xịn sò hơn 2">
+      <option name="closed" value="true" />
+      <created>1711122811619</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1711122811619</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,7 +316,9 @@
     <MESSAGE value="sql editting function" />
     <MESSAGE value="date validation check function" />
     <MESSAGE value="search button and searchBox" />
-    <option name="LAST_COMMIT_MESSAGE" value="search button and searchBox" />
+    <MESSAGE value="vẫn là bottomPanel nhưng nhìn xịn sò hơn" />
+    <MESSAGE value="vẫn là bottomPanel nhưng nhìn xịn sò hơn 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="vẫn là bottomPanel nhưng nhìn xịn sò hơn 2" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -27,6 +27,7 @@ public class Screen extends JFrame {
     private final JButton staticButton;
     private final JComboBox<String> statictype;
     private final JPopupMenu popupMenu;
+    private final JButton refreshButton;
     ArrayList<String> type = new ArrayList<String>();
     private double balance;
 
@@ -122,6 +123,12 @@ public class Screen extends JFrame {
 
         bottomPanel.add(bot1);
         bottomPanel.add(bot2);
+
+        refreshButton = new JButton("\uD83D\uDD34");
+        refreshButton.setBackground(Color.RED);
+        refreshButton.setPreferredSize(new Dimension(25,25));
+        refreshButton.addActionListener(e->reload());
+        inputPanel.add(refreshButton);
         
         add(inputPanel, BorderLayout.NORTH);
         add(bottomPanel, BorderLayout.SOUTH);
@@ -231,6 +238,9 @@ public class Screen extends JFrame {
          //database db = new database();
          displaceThis(db.returnAll());
          balanceUpdate();
+         clearInputFields();
+         editting = false;
+         refreshButton.setText("");
 
     }
 
@@ -261,6 +271,7 @@ public class Screen extends JFrame {
             JOptionPane.showMessageDialog(this, "Complete editting first", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             int index = table.getSelectedRow();
+            System.out.println("index ="+index);
             balance -= Double.parseDouble(Model.getValueAt(index, 2).toString());
             int id = Model.getEntry(index).getID();
             Model.removeRow(index);
@@ -275,7 +286,8 @@ public class Screen extends JFrame {
         } else {
             String text = searchField.getText();
             if (!text.isEmpty()) {
-                sorter.getRowFilter(RowFilter.regexFilter(text));
+                displaceThis(db.search(text));
+
             }
         }
     }
