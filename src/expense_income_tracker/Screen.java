@@ -16,6 +16,7 @@ public class Screen extends JFrame {
     private final TableRowSorter<Entry_Table> sorter = new TableRowSorter<Entry_Table>(Model);
     private final JTable table;
     boolean editting = false;
+    boolean searching = false;
     private final JTextField dateField;
     private final JTextField descriptionField;
     private final JTextField amountField;
@@ -41,8 +42,7 @@ public class Screen extends JFrame {
         catch(Exception ex){
             System.err.println("Failed to Set FlatDarkLaf LookAndFeel");
         }
-        
-       
+
         UIManager.put("TextField.foreground", Color.WHITE);
         UIManager.put("TextField.background", Color.DARK_GRAY);
         UIManager.put("TextField.caretForeground", Color.RED);
@@ -193,7 +193,13 @@ public class Screen extends JFrame {
             table.clearSelection();
             db.editEntry(Model.getEntry(index).getID(),entry);
             Model.EditRow(index, entry);
-
+            if (searching) {
+                String text = searchField.getText();
+                if (!text.isEmpty()) {
+                    searching = true;
+                    displaceThis(db.search(text));
+                }
+            }
             editting = false;
         }
         balanceUpdate();
@@ -240,6 +246,7 @@ public class Screen extends JFrame {
          balanceUpdate();
          clearInputFields();
          editting = false;
+         searching = false;
          refreshButton.setText("");
 
     }
@@ -286,8 +293,8 @@ public class Screen extends JFrame {
         } else {
             String text = searchField.getText();
             if (!text.isEmpty()) {
+                searching = true;
                 displaceThis(db.search(text));
-
             }
         }
     }
