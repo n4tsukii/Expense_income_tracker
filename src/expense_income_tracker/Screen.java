@@ -199,8 +199,10 @@ public class Screen extends JFrame {
             if (searching) {
                 String text = currentSearch;
                 if (!text.isEmpty()) {
-                    searching = true;
                     displaceThis(db.search(text));
+                } else {
+                    searching = false;
+                    displaceThis(db.returnAll());
                 }
             }
             editting = false;
@@ -292,6 +294,9 @@ public class Screen extends JFrame {
                 if (!text.isEmpty()) {
                     searching = true;
                     displaceThis(db.search(text));
+                } else {
+                    searching = false;
+                    displaceThis(db.returnAll());
                 }
             }
             balanceUpdate();
@@ -306,6 +311,9 @@ public class Screen extends JFrame {
             if (!currentSearch.isEmpty()) {
                 searching = true;
                 displaceThis(db.search(currentSearch));
+            } else {
+                searching = false;
+                displaceThis(db.returnAll());
             }
         }
     }
