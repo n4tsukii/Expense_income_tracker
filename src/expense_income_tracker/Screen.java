@@ -283,7 +283,15 @@ public class Screen extends JFrame {
             int id = Model.getEntry(index).getID();
             Model.removeRow(index);
             db.removeThis(id);
-            balanceLabel.setText("Balance: " + formatDouble(balance) + " VND");
+            displaceThis(db.returnAll());
+            if (searching) {
+                String text = searchField.getText();
+                if (!text.isEmpty()) {
+                    searching = true;
+                    displaceThis(db.search(text));
+                }
+            }
+            balanceUpdate();
         }
     }
 
