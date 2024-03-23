@@ -31,6 +31,7 @@ public class Screen extends JFrame {
     private final JButton refreshButton;
     ArrayList<String> type = new ArrayList<String>();
     private double balance;
+    private String currentSearch;
 
     private static String date_format = "yyyy-MM-dd";
 
@@ -104,6 +105,14 @@ public class Screen extends JFrame {
         inputPanel.add(setButton);
         //inputPanel.add(searchButton);
         //JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+         refreshButton = new JButton("\uD83D\uDD04");
+         refreshButton.setBackground(Color.RED);
+         refreshButton.setPreferredSize(new Dimension(25,25));
+         refreshButton.addActionListener(e->reload());
+         inputPanel.add(refreshButton);
+
+
         JPanel bottomPanel = new JPanel();
 
 
@@ -123,12 +132,6 @@ public class Screen extends JFrame {
 
         bottomPanel.add(bot1);
         bottomPanel.add(bot2);
-
-        refreshButton = new JButton("\uD83D\uDD34");
-        refreshButton.setBackground(Color.RED);
-        refreshButton.setPreferredSize(new Dimension(25,25));
-        refreshButton.addActionListener(e->reload());
-        inputPanel.add(refreshButton);
         
         add(inputPanel, BorderLayout.NORTH);
         add(bottomPanel, BorderLayout.SOUTH);
@@ -194,7 +197,7 @@ public class Screen extends JFrame {
             db.editEntry(Model.getEntry(index).getID(),entry);
             Model.EditRow(index, entry);
             if (searching) {
-                String text = searchField.getText();
+                String text = currentSearch;
                 if (!text.isEmpty()) {
                     searching = true;
                     displaceThis(db.search(text));
@@ -247,7 +250,7 @@ public class Screen extends JFrame {
          clearInputFields();
          editting = false;
          searching = false;
-         refreshButton.setText("");
+         searchField.setText("");
 
     }
 
@@ -278,7 +281,7 @@ public class Screen extends JFrame {
             JOptionPane.showMessageDialog(this, "Complete editting first", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             int index = table.getSelectedRow();
-            System.out.println("index ="+index);
+            //System.out.println("index ="+index);
             balance -= Double.parseDouble(Model.getValueAt(index, 2).toString());
             int id = Model.getEntry(index).getID();
             Model.removeRow(index);
@@ -299,10 +302,10 @@ public class Screen extends JFrame {
         if (editting) {
             JOptionPane.showMessageDialog(this, "Complete editting first", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            String text = searchField.getText();
-            if (!text.isEmpty()) {
+            currentSearch = searchField.getText();
+            if (!currentSearch.isEmpty()) {
                 searching = true;
-                displaceThis(db.search(text));
+                displaceThis(db.search(currentSearch));
             }
         }
     }
