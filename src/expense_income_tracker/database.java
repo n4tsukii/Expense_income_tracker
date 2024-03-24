@@ -153,6 +153,10 @@ public class database {
         public double balanceCheck() {
             String cmd = "select sum(amount) as total_balance from entry_table";
             ResultSet resultSet =  cmdExecute(cmd);
+            return reToDouble(resultSet);
+        }
+
+        public double reToDouble(ResultSet resultSet){
             double balance =0.0;
             try {
                 if (resultSet.next()) {
@@ -174,6 +178,25 @@ public class database {
 
 
         }
+
+        public double thongke(String type,int day) {
+            String cmd = "select sum(amount)  as sum from entry_table\n" +
+                    "where date between (select DATE_sub(curdate(), interval "+ day+ " day)) AND  (curdate()) and type = \""+type+ "\"";
+            ResultSet resultSet = cmdExecute(cmd);
+            double sum=0;
+            try {
+                if (resultSet.next()) {
+
+                    sum = resultSet.getDouble("sum");
+
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return sum;
+
+        }
+
 
 
 

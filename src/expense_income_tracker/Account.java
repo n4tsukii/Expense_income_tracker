@@ -19,11 +19,11 @@ public class Account {
         return this.balance;
     }
     
-    public void addAmount(double amount) {
-        setBalance(this.balance + amount);
-    }
+//    public void addAmount(double amount) {
+//        setBalance(this.balance + amount);
+//    }
     
-    void addBalance(Entry ee) {
-        this.addAmount(ee.getAmount());
-    }
+//    void addBalance(Entry ee) {
+//        this.addAmount(ee.getAmount());
+//    }
 }

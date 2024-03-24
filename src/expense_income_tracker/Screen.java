@@ -146,9 +146,7 @@ public class Screen extends JFrame {
      }
 
 
-    private void staticpopup() {
-        JOptionPane.showMessageDialog(null, "Balance " + formatDouble(balance) + " VND", "Thong Ke", JOptionPane.INFORMATION_MESSAGE);
-    }
+
        
     private void setEntry() {
         String date = dateField.getText();
@@ -172,13 +170,18 @@ public class Screen extends JFrame {
             JOptionPane.showMessageDialog(this, "Invalid Amount Format", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if(amount <0) {
+            type = "Expense";
+        }
 
-        if(type.equals("Expense"))
+        if(type.equals("Expense") && amount >0)
         {
             amount *= -1;
         }
 
-        if (balance <= 0 && amount < 0) {
+
+
+        if ((balance + amount) <0) {
             int answer = JOptionPane.showConfirmDialog(null, "Are you sure your want to expense more !? Your balance is low", "Warning!!", JOptionPane.OK_CANCEL_OPTION);
             if (answer == JOptionPane.CANCEL_OPTION)
                 return ;
@@ -197,13 +200,7 @@ public class Screen extends JFrame {
             db.editEntry(Model.getEntry(index).getID(),entry);
             Model.EditRow(index, entry);
             if (searching) {
-                String text = currentSearch;
-                if (!text.isEmpty()) {
-                    displaceThis(db.search(text));
-                } else {
-                    searching = false;
-                    displaceThis(db.returnAll());
-                }
+                displaceThis(db.search(currentSearch));
             }
             editting = false;
         }
@@ -237,7 +234,7 @@ public class Screen extends JFrame {
     public void displaceThis(Entry_Table new_table) {
         Model.updateEntryTable(new_table.returnAllEntries());
         Model.fireTableDataChanged();
-        //System.out.println("WELLCOME !!");
+
     }
 
     public void balanceUpdate() {
@@ -252,6 +249,7 @@ public class Screen extends JFrame {
          clearInputFields();
          editting = false;
          searching = false;
+         currentSearch = "";
          searchField.setText("");
 
     }
@@ -283,7 +281,7 @@ public class Screen extends JFrame {
             JOptionPane.showMessageDialog(this, "Complete editting first", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             int index = table.getSelectedRow();
-            //System.out.println("index ="+index);
+
             balance -= Double.parseDouble(Model.getValueAt(index, 2).toString());
             int id = Model.getEntry(index).getID();
             Model.removeRow(index);
@@ -306,15 +304,37 @@ public class Screen extends JFrame {
     public void search() {
         if (editting) {
             JOptionPane.showMessageDialog(this, "Complete editting first", "Error", JOptionPane.ERROR_MESSAGE);
+
         } else {
             currentSearch = searchField.getText();
             if (!currentSearch.isEmpty()) {
                 searching = true;
                 displaceThis(db.search(currentSearch));
             } else {
-                searching = false;
-                displaceThis(db.returnAll());
+                reload();
             }
         }
+    }
+
+    public void thongke() {
+
+
+    }
+
+    private void staticpopup() {
+        int i=0;
+        String stype = (String) statictype.getSelectedItem(); //"Month", "Week", "Day"
+        if(stype.equals("Month")) {
+            i = 30;
+        }
+        if(stype.equals("Week")) {
+            i = 6;
+        }
+        double income  =  db.thongke("income",i);
+        double expense =  db.thongke("expense",i);
+        //JOptionPane.showMessageDialog(null, "Your income and expense and expenses last"+stype+"is: "+income+ "and "+expense);
+
+        JOptionPane.showMessageDialog(null, "Income: "+income+ " VND\nExpense: "+expense+" VND\nTotal: " + (income-expense) + " VND", "Your income and expense last "+stype, JOptionPane.INFORMATION_MESSAGE);
+
     }
 }
